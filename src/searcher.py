@@ -1,12 +1,13 @@
 from selenium.webdriver.support.select import Select
-import time
 
-from src.settings import show_versions, options_versions, submit_versions, web_map, go_to_search
+from src.entityscrapper import EntityScraper
+from src.settings import show_versions, options_versions, submit_versions, web_map
+from settings.search import go_to_search, submit_search, results_table_path
 
 from selenium.common.exceptions import NoSuchElementException
 
 
-class CCAASelector:
+class Searcher:
 
     BASE_URL = "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PubInvCCAA/secciones/FrmSelComunidad.aspx"
 
@@ -19,8 +20,10 @@ class CCAASelector:
 
         self.select_proper_version()
         self.select_proper_region()
-        search = 
+        self.fill_search_parameters()
+        self.scrap_results()
 
+        input("sffds")
     def select_proper_version(self):
         try:
             # See if the submit button is displayed
@@ -60,3 +63,20 @@ class CCAASelector:
 
         search = self.driver.find_element_by_css_selector(go_to_search)
         search.click()
+
+    def fill_search_parameters(self):
+        # TODO: Include all the available parameters to search
+
+        search_button = self.driver.find_element_by_xpath(submit_search)
+        search_button.click()
+
+    def scrap_results(self):
+        table = self.driver.find_element_by_xpath(results_table_path)
+
+        for row in table.find_elements_by_xpath(".//tr"):
+            elements = row.find_elements_by_xpath(".//td")
+            # If this row is not empty
+            if len(elements) != 0:
+                link = elements[0].find_element_by_xpath(".//a")
+                entity = EntityScraper(self.driver, link)
+
