@@ -20,14 +20,6 @@ web_map = {
     "Castilla y León": "#contenedor_columna_1 > div:nth-child(5) > a"
 }
 
-# Historial
-show_versions = "//*[@id='Cabecera1_bt_historial']"
-
-# Send_historial
-submit_versions = "//*[@id='Cabecera1_bt_seleccionar']"
-
-# Options
-options_versions = "//*[@id='Cabecera1_lbx_historial']"
 
 
 

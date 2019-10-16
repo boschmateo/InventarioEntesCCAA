@@ -4,8 +4,7 @@ from selenium_wrapper import SeleniumWrapper
 from src.searcher import Searcher
 
 
-class InventarioEntesCCAAScrapper():
-
+class InventarioEntesCCAAScrapper:
 
     def __init__(self, headless=True):
         # Start the Chrome driver

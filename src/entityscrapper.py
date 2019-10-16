@@ -1,10 +1,12 @@
+import pandas as pd
 
 
 class EntityScraper:
     
-    def __init__(self, driver, link_ref):
+    def __init__(self, driver):
         self.driver = driver
-        link_ref.click()
-        input("fsd")
-        self.driver.execute_script("window.history.go(-1)")
-        input("sdfdf")
+        self.data = None
+
+
+    def get_data(self):
+        return self.data

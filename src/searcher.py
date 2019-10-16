@@ -1,7 +1,9 @@
 from selenium.webdriver.support.select import Select
 
 from src.entityscrapper import EntityScraper
-from src.settings import show_versions, options_versions, submit_versions, web_map
+from settings.settings import web_map
+from settings.versions import show_versions, options_versions, submit_versions
+from settings.single_entity import show_all_data
 from settings.search import go_to_search, submit_search, results_table_path
 
 from selenium.common.exceptions import NoSuchElementException
@@ -24,6 +26,7 @@ class Searcher:
         self.scrap_results()
 
         input("sffds")
+
     def select_proper_version(self):
         try:
             # See if the submit button is displayed
@@ -73,10 +76,25 @@ class Searcher:
     def scrap_results(self):
         table = self.driver.find_element_by_xpath(results_table_path)
 
+        found_links = []
         for row in table.find_elements_by_xpath(".//tr"):
             elements = row.find_elements_by_xpath(".//td")
             # If this row is not empty
             if len(elements) != 0:
-                link = elements[0].find_element_by_xpath(".//a")
-                entity = EntityScraper(self.driver, link)
+                entity_link = elements[0].find_element_by_xpath(".//a").get_attribute("href")
+                found_links.append(entity_link)
 
+        for link in found_links:
+            self._scrap_single_entity(link)
+
+    def _scrap_single_entity(self, link):
+        # Click to show the info of a specific entity
+        self.driver.get(link)
+
+        # Show all data from this entity
+        all_data_link = self.driver.find_element_by_xpath(show_all_data)
+        all_data_link.click()
+
+        entity = EntityScraper(self.driver)
+
+        return entity.get_data()
