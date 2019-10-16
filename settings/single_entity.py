@@ -38,7 +38,7 @@ components_values = ["codigo", "componente", "porcentaje_participacion", "porcen
                     "fuente_alta", "inf_fuente_alta", "alta_desde"]
 
 # Historical name data
-historical_name_data = "//*[@id='TABLE2']"
+historical_name_table = "//*[@id='TABLE2']"
 historical_name_values = ["nombre", "fuente_alta", "inf_fuente_alta", "fuente_baja",
                          "inf_fuente_baja", "alta_desde", "baja_desde"]
 

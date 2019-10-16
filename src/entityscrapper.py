@@ -9,7 +9,10 @@ class EntityScraper:
         self.region = region
 
         self.generic_data = self.extract_generic_data()
-        # TODO: Extract other data
+        self.activity_data = self.extract_activities_data()
+        self.component_data = self.extract_components_data()
+        self.historical_name_data = self.extract_historical_name_data()
+        self.historical_social_capital_data = self.extract_historical_social_capital_data()
 
     def extract_generic_data(self):
         generic_data = {}
@@ -51,6 +54,35 @@ class EntityScraper:
 
         return generic_data
 
+    def generic_table_extractor(self, x_path, table_headers):
+        table = self.driver.find_element_by_xpath(x_path)
+
+        found_activities = []
+        for row in table.find_elements_by_xpath(".//tr"):
+            elements = row.find_elements_by_xpath(".//td")
+            # If this row is not empty
+            if len(elements) != 0:
+                activity_data = {}
+                for i in range(len(elements)):
+                    activity_data[table_headers[i]] = self._get_text_from_table(elements[i])
+
+                found_activities.append(activity_data)
+
+        return found_activities
+
+    # TODO: Falta afegir a tots version + codi entitat
+    def extract_activities_data(self):
+        return self.generic_table_extractor(se.activity_table, se.activity_values)
+
+    def extract_components_data(self):
+        return self.generic_table_extractor(se.components_table, se.components_values)
+
+    def extract_historical_name_data(self):
+        return self.generic_table_extractor(se.historical_name_table, se.historical_name_values)
+
+    def extract_historical_social_capital_data(self):
+        return self.generic_table_extractor(se.historical_social_capital_table, se.historical_social_capital_values)
+
     def _get_value_from_xpath(self, path):
         try:
             value = self.driver.find_element_by_xpath(path)
@@ -61,4 +93,15 @@ class EntityScraper:
                 return value
         except Exception:
             print("HEY Something wrong with {0}".format(path))
+            return None
+
+    def _get_text_from_table(self, element):
+        try:
+            text = element.text
+            if text == "" or text == " ":
+                return None
+            else:
+                return text
+        except Exception:
+            print("HEY Something wrong with {0}".format(element))
             return None

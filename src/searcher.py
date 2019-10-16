@@ -108,4 +108,5 @@ class Searcher:
 
         entity = EntityScraper(self.driver, self.version, self.region)
 
-        return entity.generic_data
+        return entity.generic_data, entity.activity_data, entity.component_data, \
+               entity.historical_name_data, entity.historical_social_capital_data
