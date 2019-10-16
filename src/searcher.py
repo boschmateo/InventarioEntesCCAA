@@ -8,6 +8,8 @@ from settings.search import go_to_search, submit_search, results_table_path
 
 from selenium.common.exceptions import NoSuchElementException
 
+from src.search_results import SearchResults
+
 
 class Searcher:
 
@@ -17,6 +19,7 @@ class Searcher:
         self.driver = driver
         self.version = version
         self.region = region
+        self.search_results = SearchResults()
 
         self.driver.get(self.BASE_URL)
 
@@ -24,8 +27,7 @@ class Searcher:
         self.select_proper_region()
         self.fill_search_parameters()
         self.scrap_results()
-
-        input("sffds")
+        self.search_results.export()
 
     def select_proper_version(self):
         try:
@@ -84,8 +86,17 @@ class Searcher:
                 entity_link = elements[0].find_element_by_xpath(".//a").get_attribute("href")
                 found_links.append(entity_link)
 
+        generic_data_found = []
+        count = 0
         for link in found_links:
-            self._scrap_single_entity(link)
+            gd = self._scrap_single_entity(link)
+
+            generic_data_found.append(gd)
+            if count == 16:
+                break
+            count += 1
+
+        self.search_results.add_generic_data(generic_data_found)
 
     def _scrap_single_entity(self, link):
         # Click to show the info of a specific entity
@@ -95,6 +106,6 @@ class Searcher:
         all_data_link = self.driver.find_element_by_xpath(show_all_data)
         all_data_link.click()
 
-        entity = EntityScraper(self.driver)
+        entity = EntityScraper(self.driver, self.version, self.region)
 
-        return entity.get_data()
+        return entity.generic_data
