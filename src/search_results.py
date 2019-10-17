@@ -1,6 +1,5 @@
 import os
 
-from datetime import datetime
 import pandas as pd
 
 from settings.single_entity import activity_columns, components_columns, historical_name_columns, \
@@ -9,7 +8,9 @@ from settings.single_entity import activity_columns, components_columns, histori
 
 class SearchResults:
 
-    def __init__(self):
+    def __init__(self, output_folder):
+        self.output_folder = output_folder
+
         self.generic_data = None
         self.activity_data = None
         self.components_data = None
@@ -44,27 +45,24 @@ class SearchResults:
         self.historical_social_capital_data = pd.DataFrame(values, columns=columns)
 
     def export(self):
-        main_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        output_directory = main_directory + "/output/"
-
-        generic_data_path = output_directory + "generic_data.csv"
+        generic_data_path = self.output_folder + "/generic_data.csv"
         self._single_export(generic_data_path, self.generic_data)
 
-        activity_path = output_directory + "activity_data.csv"
+        activity_path = self.output_folder + "/activity_data.csv"
         self._single_export(activity_path, self.activity_data)
 
-        components_path = output_directory + "components_data.csv"
+        components_path = self.output_folder + "/components_data.csv"
         self._single_export(components_path, self.components_data)
 
-        historical_name_path = output_directory + "historical_name_data.csv"
+        historical_name_path = self.output_folder + "/historical_name_data.csv"
         self._single_export(historical_name_path, self.historical_names_data)
 
-        historical_social_capital_path = output_directory + "historical_social_capital_data.csv"
+        historical_social_capital_path = self.output_folder + "/historical_social_capital_data.csv"
         self._single_export(historical_social_capital_path, self.historical_social_capital_data)
 
     def _single_export(self, file_path, data):
         if os.path.isfile(file_path):
             with open(file_path, "a") as file:
-                data.to_csv(file, header=False)
+                data.to_csv(file, header=False, index=False)
         else:
-            data.to_csv(file_path)
+            data.to_csv(file_path, index=False)

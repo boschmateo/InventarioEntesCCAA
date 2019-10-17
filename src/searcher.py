@@ -15,11 +15,11 @@ class Searcher:
 
     BASE_URL = "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PubInvCCAA/secciones/FrmSelComunidad.aspx"
 
-    def __init__(self, driver, version, community):
+    def __init__(self, driver, output_folder, version, community):
         self.driver = driver
         self.version = version
         self.region = community
-        self.search_results = SearchResults()
+        self.search_results = SearchResults(output_folder)
 
         self.driver.get(self.BASE_URL)
 

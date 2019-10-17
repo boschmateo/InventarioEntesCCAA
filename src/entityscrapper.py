@@ -1,3 +1,5 @@
+from selenium.common.exceptions import NoSuchElementException
+
 import settings.single_entity as se
 
 
@@ -55,25 +57,29 @@ class EntityScraper:
         return generic_data
 
     def generic_table_extractor(self, x_path, table_headers):
-        table = self.driver.find_element_by_xpath(x_path)
+        try:
+            table = self.driver.find_element_by_xpath(x_path)
 
-        found_activities = []
-        for row in table.find_elements_by_xpath(".//tr"):
-            elements = row.find_elements_by_xpath(".//td")
-            # If this row is not empty
-            if len(elements) != 0 and len(elements) >= len(table_headers):
-                activity_data = {}
-                activity_data["version"] = self.version
-                activity_data["codigo_ente"] = self.generic_data["codigo_ente"]
-                for i in range(len(table_headers)):
-                    col_name = table_headers[i]
-                    element = elements[i]
-                    activity_data[col_name] = self._get_text_from_table(element)
-                    # activity_data[table_headers[i]] = self._get_text_from_table(elements[i])
+            found_activities = []
+            for row in table.find_elements_by_xpath(".//tr"):
+                elements = row.find_elements_by_xpath(".//td")
+                # If this row is not empty
+                if len(elements) != 0 and len(elements) >= len(table_headers):
+                    activity_data = {}
+                    activity_data["version"] = self.version
+                    activity_data["codigo_ente"] = self.generic_data["codigo_ente"]
+                    for i in range(len(table_headers)):
+                        col_name = table_headers[i]
+                        element = elements[i]
+                        activity_data[col_name] = self._get_text_from_table(element)
+                        # activity_data[table_headers[i]] = self._get_text_from_table(elements[i])
 
-                found_activities.append(activity_data)
+                    found_activities.append(activity_data)
 
-        return found_activities
+            return found_activities
+        except NoSuchElementException:
+            print("ERROR WITH THIS TABLE")
+            return []
 
     # TODO: Falta afegir a tots version + codi entitat
     def extract_activities_data(self):
