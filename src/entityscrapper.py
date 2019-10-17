@@ -1,3 +1,5 @@
+__author__ = "Roger Bosch Mateo"
+
 from selenium.common.exceptions import NoSuchElementException
 
 import settings.single_entity as se

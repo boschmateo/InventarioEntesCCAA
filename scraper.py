@@ -1,3 +1,9 @@
+__author__ = "Roger Bosch Mateo"
+
+"""
+Main script that calls the scraper with the desired parameters
+"""
+
 import argparse
 
 from settings.settings import web_map
@@ -8,7 +14,7 @@ parser = argparse.ArgumentParser(description=description)
 
 parser.add_argument("--version",
                     type=str,
-                    nargs=1,
+                    nargs="?",
                     help="Specify the desired version of the data that wants to be scraped.\n"
                          "Usually two versions are available for each year as 20XX/01 or "
                          "200XX/02 (this information can be obtained from the web page at "

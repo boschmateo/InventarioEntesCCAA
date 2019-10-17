@@ -1,3 +1,5 @@
+__author__ = "Roger Bosch Mateo"
+
 import os
 import platform
 
@@ -44,5 +46,12 @@ class SeleniumWrapper:
 
         return directory + "/drivers/" + file
 
-    def get_driver(self):
-        return self.driver
+    def get(self, url):
+        """
+        Method that calls the driver "get" to obtain a website. It acts as
+        a centralized point to avoid doing too many requests in a small period
+        of time. Adds user-agent spoofing.
+        :param url: url of the desired website to obtain
+        """
+        # TODO: Implement here user-agent spoofing and timing restrictions.
+        self.driver.get(url)
