@@ -31,7 +31,7 @@ class EntityScraper:
 
         alta1 = self._get_value_from_xpath(se.fuente_alta_1)
         alta2 = self._get_value_from_xpath(se.fuente_alta_2)
-        if alta1 is not  None or alta2 is not None:
+        if alta1 is not None or alta2 is not None:
             if alta1 is None:
                 alta1 = ""
             if alta2 is None:
@@ -61,10 +61,15 @@ class EntityScraper:
         for row in table.find_elements_by_xpath(".//tr"):
             elements = row.find_elements_by_xpath(".//td")
             # If this row is not empty
-            if len(elements) != 0:
+            if len(elements) != 0 and len(elements) >= len(table_headers):
                 activity_data = {}
-                for i in range(len(elements)):
-                    activity_data[table_headers[i]] = self._get_text_from_table(elements[i])
+                activity_data["version"] = self.version
+                activity_data["codigo_ente"] = self.generic_data["codigo_ente"]
+                for i in range(len(table_headers)):
+                    col_name = table_headers[i]
+                    element = elements[i]
+                    activity_data[col_name] = self._get_text_from_table(element)
+                    # activity_data[table_headers[i]] = self._get_text_from_table(elements[i])
 
                 found_activities.append(activity_data)
 
@@ -72,16 +77,16 @@ class EntityScraper:
 
     # TODO: Falta afegir a tots version + codi entitat
     def extract_activities_data(self):
-        return self.generic_table_extractor(se.activity_table, se.activity_values)
+        return self.generic_table_extractor(se.activity_table, se.activity_columns)
 
     def extract_components_data(self):
-        return self.generic_table_extractor(se.components_table, se.components_values)
+        return self.generic_table_extractor(se.components_table, se.components_columns)
 
     def extract_historical_name_data(self):
-        return self.generic_table_extractor(se.historical_name_table, se.historical_name_values)
+        return self.generic_table_extractor(se.historical_name_table, se.historical_name_columns)
 
     def extract_historical_social_capital_data(self):
-        return self.generic_table_extractor(se.historical_social_capital_table, se.historical_social_capital_values)
+        return self.generic_table_extractor(se.historical_social_capital_table, se.historical_social_capital_columns)
 
     def _get_value_from_xpath(self, path):
         try:

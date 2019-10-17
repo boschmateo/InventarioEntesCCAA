@@ -1,37 +1,70 @@
 import os
 
+from datetime import datetime
 import pandas as pd
 
-from settings.single_entity import activity_values, components_values, historical_name_values, \
-    historical_social_capital_values
+from settings.single_entity import activity_columns, components_columns, historical_name_columns, \
+    historical_social_capital_columns, generic_data_columns
 
 
 class SearchResults:
 
     def __init__(self):
-        self.generic_data_columns = ["version", "comunidad", "codigo_ente", "tipo_ente", "accionista_mayoritario",
-                                     "nombre", "cif", "capital_social", "finalidad", "regimen_contable",
-                                     "regimen_presupuestario", "sector_admin_publica", "fuente_alta", "alta_desde",
-                                     "ente_proviene", "direccion", "localidad", "codigo_postal", "provincia",
-                                     "telefono", "fax", "sitio_web", "email"]
-        self.generic_data = pd.DataFrame(columns=self.generic_data_columns)
-        self.actvity_data = pd.DataFrame(columns=activity_values)
-        self.components_data = pd.DataFrame(columns=components_values)
-        self.historical_names_data = pd.DataFrame(columns=historical_name_values)
-        self.historical_social_capital_data = pd.DataFrame(columns=historical_social_capital_values)
+        self.generic_data = None
+        self.activity_data = None
+        self.components_data = None
+        self.historical_names_data = None
+        self.historical_social_capital_data = None
 
     def add_generic_data(self, values):
-        self.generic_data = pd.DataFrame(values, columns=self.generic_data_columns)
-        print(self.generic_data.head(n=15))
+        self.generic_data = pd.DataFrame(values, columns=generic_data_columns)
+
+    def add_activity_data(self, values):
+        # Add two necessary columns to the data t be able to identify the source
+        # entity and the current version
+        columns = ["version", "codigo_ente"] + activity_columns
+        self.activity_data = pd.DataFrame(values, columns=columns)
+
+    def add_components_data(self, values):
+        # Add two necessary columns to the data t be able to identify the source
+        # entity and the current version
+        columns = ["version", "codigo_ente"] + components_columns
+        self.components_data = pd.DataFrame(values, columns=columns)
+
+    def add_historical_names_data(self, values):
+        # Add two necessary columns to the data t be able to identify the source
+        # entity and the current version
+        columns = ["version", "codigo_ente"] + historical_name_columns
+        self.historical_names_data = pd.DataFrame(values, columns=columns)
+
+    def add_historical_social_capital_data(self, values):
+        # Add two necessary columns to the data t be able to identify the source
+        # entity and the current version
+        columns = ["version", "codigo_ente"] + historical_social_capital_columns
+        self.historical_social_capital_data = pd.DataFrame(values, columns=columns)
 
     def export(self):
-        # TODO: This should work with the four different outputs
         main_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         output_directory = main_directory + "/output/"
-        output_file = output_directory + "test.csv"
 
-        if os.path.isfile(output_file):
-            with open(output_file, "a") as file:
-                self.generic_data.to_csv(file, header=False)
+        generic_data_path = output_directory + "generic_data.csv"
+        self._single_export(generic_data_path, self.generic_data)
+
+        activity_path = output_directory + "activity_data.csv"
+        self._single_export(activity_path, self.activity_data)
+
+        components_path = output_directory + "components_data.csv"
+        self._single_export(components_path, self.components_data)
+
+        historical_name_path = output_directory + "historical_name_data.csv"
+        self._single_export(historical_name_path, self.historical_names_data)
+
+        historical_social_capital_path = output_directory + "historical_social_capital_data.csv"
+        self._single_export(historical_social_capital_path, self.historical_social_capital_data)
+
+    def _single_export(self, file_path, data):
+        if os.path.isfile(file_path):
+            with open(file_path, "a") as file:
+                data.to_csv(file, header=False)
         else:
-            self.generic_data.to_csv(output_directory + "test.csv")
+            data.to_csv(file_path)

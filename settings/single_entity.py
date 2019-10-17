@@ -1,7 +1,11 @@
 show_all_data = "//*[@id='Hyperlink1']"
 
 # Available information for a single entity
-
+generic_data_columns = ["version", "comunidad", "codigo_ente", "tipo_ente", "accionista_mayoritario",
+                        "nombre", "cif", "capital_social", "finalidad", "regimen_contable",
+                        "regimen_presupuestario", "sector_admin_publica", "fuente_alta", "alta_desde",
+                        "ente_proviene", "direccion", "localidad", "codigo_postal", "provincia",
+                        "telefono", "fax", "sitio_web", "email"]
 # Generic data
 codigo_ente = "//*[@id='txtDGCodigoEnte']"
 tipo_ente = "//*[@id='TxtDGTipoEnte']"
@@ -30,19 +34,19 @@ email = "//*[@id='TxtDPemail']"
 
 # Activity data
 activity_table = "//*[@id='TablaDetalle']"
-activity_values = ["codigo", "actividad", "fuente_alta", "inf_fuente_alta", "alta_desde"]
+activity_columns = ["codigo", "actividad", "fuente_alta", "inf_fuente_alta", "alta_desde"]
 
 # Components data
 components_table = "//*[@id='TABLE1']"
-components_values = ["codigo", "componente", "porcentaje_participacion", "porcentaje_voto",
-                    "fuente_alta", "inf_fuente_alta", "alta_desde"]
+components_columns = ["codigo", "componente", "porcentaje_participacion", "porcentaje_voto",
+                     "fuente_alta", "inf_fuente_alta", "alta_desde"]
 
 # Historical name data
 historical_name_table = "//*[@id='TABLE2']"
-historical_name_values = ["nombre", "fuente_alta", "inf_fuente_alta", "fuente_baja",
-                         "inf_fuente_baja", "alta_desde", "baja_desde"]
+historical_name_columns = ["nombre", "fuente_alta", "inf_fuente_alta", "fuente_baja",
+                          "inf_fuente_baja", "alta_desde", "baja_desde"]
 
 # Historical social capital data
 historical_social_capital_table = "//*[@id='TABLE3']"
-historical_social_capital_values = ["nombre", "fuente_alta", "inf_fuente_alta", "fuente_baja",
+historical_social_capital_columns = ["nombre", "fuente_alta", "inf_fuente_alta", "fuente_baja",
                                   "inf_fuente_baja", "alta_desde", "baja_desde"]

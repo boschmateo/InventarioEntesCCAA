@@ -15,10 +15,10 @@ class Searcher:
 
     BASE_URL = "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PubInvCCAA/secciones/FrmSelComunidad.aspx"
 
-    def __init__(self, driver, version="", region=None):
+    def __init__(self, driver, version, community):
         self.driver = driver
         self.version = version
-        self.region = region
+        self.region = community
         self.search_results = SearchResults()
 
         self.driver.get(self.BASE_URL)
@@ -87,16 +87,29 @@ class Searcher:
                 found_links.append(entity_link)
 
         generic_data_found = []
+        activity_data_found = []
+        components_data_found = []
+        historical_name_data_found = []
+        historical_social_capital_data_found = []
         count = 0
         for link in found_links:
-            gd = self._scrap_single_entity(link)
-
+            gd, act, comp, hist_name, hist_c_s = self._scrap_single_entity(link)
             generic_data_found.append(gd)
-            if count == 16:
+            activity_data_found += act
+            components_data_found += comp
+            historical_name_data_found += hist_name
+            historical_social_capital_data_found += hist_c_s
+
+            if count == 15:
                 break
+
             count += 1
 
         self.search_results.add_generic_data(generic_data_found)
+        self.search_results.add_activity_data(activity_data_found)
+        self.search_results.add_components_data(components_data_found)
+        self.search_results.add_historical_names_data(historical_name_data_found)
+        self.search_results.add_historical_social_capital_data(historical_social_capital_data_found)
 
     def _scrap_single_entity(self, link):
         # Click to show the info of a specific entity

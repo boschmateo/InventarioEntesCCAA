@@ -1,2 +1,6 @@
 - Version 78 for Linux, Mac and Windows is included. If an older or newer version is needed it can be downloaded from https://chromedriver.chromium.org/downloads. + where to put the version
 - In mac os driver proviende de un desarrollador no identificado: ERROR
+- TODO: Handke when a page is inexistent (Pais vasc in some historical data)
+- TODO: Add user-agent spoofing
+- TODO: Add elapsed time between get requests
+- TODO: Fer output en una carpeta i adjuntar la search que s'ha fet -> crear la carpeta abans amb el dia i la hora
