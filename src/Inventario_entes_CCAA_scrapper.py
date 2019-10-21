@@ -14,7 +14,7 @@ class InventarioEntesCCAAScrapper:
     Class that receives the desired search by the user and performs it.
     """
 
-    def __init__(self, version, communities, headless):
+    def __init__(self, version, communities, province, entity_types, headless):
         """
         Constructor that initializes the search desired by the user.
         :param version: String containing the desired historical version
@@ -32,9 +32,10 @@ class InventarioEntesCCAAScrapper:
 
         self.version = self._version_search(version)
         self.communities = self._communities_search(communities)
+        self.entity_types = self._entity_types_search(entity_types)
 
-        for community in communities:
-            Searcher(self.driver, self.output_folder, version=version, community=community)
+        for community in self.communities:
+            Searcher(self.driver, self.output_folder, version=self.version, community=community)
 
     @staticmethod
     def _start_chrome_driver(headless=True):
@@ -77,3 +78,8 @@ class InventarioEntesCCAAScrapper:
         # If communities are specified, stick to what the user wants
         else:
             return communities
+
+    @staticmethod
+    def _entity_types_search(entity_types):
+        if entity_types is None:
+            pass

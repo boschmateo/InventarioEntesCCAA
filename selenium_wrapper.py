@@ -55,3 +55,12 @@ class SeleniumWrapper:
         """
         # TODO: Implement here user-agent spoofing and timing restrictions.
         self.driver.get(url)
+
+    def find_element_by_xpath(self, path):
+        return self.driver.find_element_by_xpath(path)
+
+    def find_element_by_css_selector(self, path):
+        return self.driver.find_element_by_css_selector(path)
+
+    def find_elements_by_xpath(self, path):
+        return self.driver.find_elements_by_xpath(path)

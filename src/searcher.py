@@ -38,6 +38,8 @@ class Searcher:
         self.region = community
         self.search_results = SearchResults(output_folder)
 
+        self.do_search()
+
     def do_search(self):
         """
         Main method that contains the skeleton (different phases)
