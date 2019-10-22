@@ -6,8 +6,18 @@ Main script that calls the scraper with the desired parameters
 
 import argparse
 
-from settings.settings import web_map
+from settings.settings import web_map, province_codes_name
+from settings.search import entity_types
 from src.Inventario_entes_CCAA_scrapper import InventarioEntesCCAAScrapper
+
+
+def get_missing_parameters(desired_parameters, available_parameters):
+    parameters_not_found = []
+    for desired_parameter in desired_parameters:
+        if desired_parameter not in available_parameters:
+            parameters_not_found.append(desired_parameter)
+
+    return parameters_not_found
 
 description = "#TODO: Add description"
 parser = argparse.ArgumentParser(description=description)
@@ -37,26 +47,68 @@ parser.add_argument("--community",
                          "Example: Search in La Rioja and Canarias do --community \"La Rioja\" \"Canarias\""
                     )
 
+parser.add_argument("--province",
+                    type=str,
+                    nargs="+",
+                    help="TODO"
+                    )
+
+parser.add_argument("--type",
+                    type=str,
+                    nargs="+",
+                    help="TODO"
+                    )
+
+parser.add_argument("--name",
+                    type=str,
+                    nargs="?",
+                    help="TODO"
+                    )
+
+parser.add_argument("--cif",
+                    type=str,
+                    nargs="?",
+                    help="TODO"
+                    )
 
 parser.add_argument("--headless",
                     action="store_true",
                     help="Start the web browser as headless. This means that no graphical interface "
                          "will be shown during scraping"
                     )
+
 args = parser.parse_args()
 
 # Check autonomous community values
 if args.community is not None:
 
-    communities_not_found = []
-    count = 0
-    for desired_community in args.community:
-        if desired_community not in web_map:
-            communities_not_found.append(desired_community)
-            count += 1
-
+    communities_not_found = get_missing_parameters(args.community, web_map)
     if len(communities_not_found) != 0:
         parser.error(
-            "{0} autonomous communities that can't be identified: {1}.".format(count, ", ".join(communities_not_found)))
+            "[--community] {0} autonomous communities that can't be identified: "
+            "{1}.".format(len(communities_not_found), ", ".join(communities_not_found)))
 
-InventarioEntesCCAAScrapper(version=args.version, communities=args.community, headless=args.headless)
+if args.province is not None:
+
+    all_provinces = []
+    for community in web_map.keys():
+        for province in web_map[community][province_codes_name].keys():
+            all_provinces.append(province)
+
+    provinces_not_found = get_missing_parameters(args.province, all_provinces)
+    if len(provinces_not_found) != 0:
+        parser.error(
+            "[--province] {0} provinces that can't be identified: "
+            "{1}.".format(len(provinces_not_found), ", ".join(provinces_not_found)))
+
+if args.type is not None:
+
+    types_not_found = get_missing_parameters(args.type, entity_types)
+    if len(types_not_found) != 0:
+        parser.error("[--type] {0} types that can't be identified: "
+                     "{1}.".format(len(types_not_found), ", ".join(types_not_found)))
+
+InventarioEntesCCAAScrapper(version=args.version, communities=args.community, province=args.province,
+                            entity_types=args.type, name=args.name, cif=args.cif, headless=args.headless)
+
+

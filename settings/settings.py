@@ -1,19 +1,19 @@
-# TODO: Baleares, Extremadura
-button = "button"
-province_codes = "province_codes"
+button_path = "button"
+province_codes_name = "province_codes"
+
 # This initial map its necessary to ease the search functionality.
 web_map = {
     "País Vasco": {
-        button: "#enlace_Pais_vasco",
-        province_codes: {
+        button_path: "#enlace_Pais_vasco",
+        province_codes_name: {
             'Álava': "01",
             "Guipúzcoa": "20",
             "Vizcaya": "48",
         },
     },
     "Cataluña": {
-        button: "#contenedor_columna_2 > div:nth-child(1) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_2 > div:nth-child(1) > a",
+        province_codes_name: {
             "Barcelona": "08",
             "Tarragona": "43",
             "Lérida": "25",
@@ -21,8 +21,8 @@ web_map = {
         }
     },
     "Galicia": {
-        button: "#contenedor_columna_3 > div:nth-child(1) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_3 > div:nth-child(1) > a",
+        province_codes_name: {
             "Coruña": "15",
             "Lugo": "27",
             "Orense": "32",
@@ -30,8 +30,8 @@ web_map = {
         }
     },
     "Andalucía": {
-        button: "#contenedor_columna_4 > div:nth-child(1) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_4 > div:nth-child(1) > a",
+        province_codes_name: {
             'Almería': "04",
             "Cádiz": "11",
             "Córdoba": "14",
@@ -43,48 +43,48 @@ web_map = {
         }
     },
     "Principado de Asturias": {
-        button: "#contenedor_columna_1 > div:nth-child(2) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_1 > div:nth-child(2) > a",
+        province_codes_name: {
             "Asturias": "33"
         }
     },
     "Cantabria": {
-        button: "#contenedor_columna_2 > div:nth-child(2) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_2 > div:nth-child(2) > a",
+        province_codes_name: {
             "Cantabria": "39",
         }
     },
     "La Rioja": {
-        button: "#contenedor_columna_3 > div:nth-child(2) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_3 > div:nth-child(2) > a",
+        province_codes_name: {
             "La Rioja": "26",
         }
     },
     "Región de Murcia": {
-        button: "#contenedor_columna_4 > div:nth-child(2) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_4 > div:nth-child(2) > a",
+        province_codes_name: {
             "Murcia": "30"
         }
     },
     "Comunitat Valenciana": {
-        button: "#contenedor_columna_1 > div:nth-child(3) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_1 > div:nth-child(3) > a",
+        province_codes_name: {
             "Alicante": "03",
             "Castellón": "12",
             "Valencia": "46"
         }
     },
     "Aragón": {
-        button: "#contenedor_columna_2 > div:nth-child(3) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_2 > div:nth-child(3) > a",
+        province_codes_name: {
             "Huesca": "22",
             "Teruel": "44",
             "Zaragoza": "50",
         }
     },
     "Castilla-La Mancha": {
-        button: "#contenedor_columna_3 > div:nth-child(3) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_3 > div:nth-child(3) > a",
+        province_codes_name: {
             "Albacete": "02",
             "Ciudad Real": "13",
             "Cuenca": "16",
@@ -93,52 +93,52 @@ web_map = {
         }
     },
     "Canarias": {
-        button: "#contenedor_columna_4 > div:nth-child(3) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_4 > div:nth-child(3) > a",
+        province_codes_name: {
             "Santa Cruz de Tenerife": "38",
             "Las Palmas": "35",
         }
     },
     "Navarra": {
-        button: "#contenedor_columna_1 > div:nth-child(4) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_1 > div:nth-child(4) > a",
+        province_codes_name: {
             "Navarra": "31",
         }
     },
     "Extremadura": {
-        button: "",
-        province_codes: {
+        button_path: "#contenedor_columna_2 > div:nth-child(4) > a",
+        province_codes_name: {
             "Badajoz": "06",
             "Cáceres": "10"
         }
     },
     "Illes Balears": {
-        button: "",
-        province_codes: {
+        button_path: "#contenedor_columna_3 > div:nth-child(4) > a",
+        province_codes_name: {
             "Baleares": "07"
         }
     },
     "Madrid": {
-        button: "",
-        province_codes: {
-            "Madrid": "00" # HAURIA DE SER 28
+        button_path: "#contenedor_columna_4 > div:nth-child(4) > a",
+        province_codes_name: {
+            "Madrid": "00" # Should be 28, but in the website appears as 00
         }
     },
     "Ceuta": {
-        button: "#contenedor_columna_2 > div:nth-child(5) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_2 > div:nth-child(5) > a",
+        province_codes_name: {
             "Ceuta": "51",
         }
     },
     "Melilla": {
-        button: "#contenedor_columna_3 > div:nth-child(5) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_3 > div:nth-child(5) > a",
+        province_codes_name: {
             "Melilla": "52"
         }
     },
     "Castilla y León": {
-        button: "#contenedor_columna_1 > div:nth-child(5) > a",
-        province_codes: {
+        button_path: "#contenedor_columna_1 > div:nth-child(5) > a",
+        province_codes_name: {
             "Palencia": "34",
             "Ávila": "05",
             "Burgos": "09",

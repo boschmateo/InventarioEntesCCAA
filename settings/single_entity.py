@@ -6,6 +6,8 @@ generic_data_columns = ["version", "comunidad", "codigo_ente", "tipo_ente", "acc
                         "regimen_presupuestario", "sector_admin_publica", "fuente_alta", "alta_desde",
                         "ente_proviene", "direccion", "localidad", "codigo_postal", "provincia",
                         "telefono", "fax", "sitio_web", "email"]
+
+# TODO: Add alternative values
 # Generic data
 codigo_ente = "//*[@id='txtDGCodigoEnte']"
 tipo_ente = "//*[@id='TxtDGTipoEnte']"
@@ -36,6 +38,7 @@ email = "//*[@id='TxtDPemail']"
 activity_table = "//*[@id='TablaDetalle']"
 activity_columns = ["codigo", "actividad", "fuente_alta", "inf_fuente_alta", "alta_desde"]
 
+# TODO: Add alternative table
 # Components data
 components_table = "//*[@id='TABLE1']"
 components_columns = ["codigo", "componente", "porcentaje_participacion", "porcentaje_voto",

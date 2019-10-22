@@ -3,10 +3,11 @@ __author__ = "Roger Bosch Mateo"
 from selenium.webdriver.support.select import Select
 
 from src.entityscrapper import EntityScraper
-from settings.settings import web_map
+from settings.settings import web_map, button_path
 from settings.versions import show_versions, options_versions, submit_versions
 from settings.single_entity import show_all_data
-from settings.search import go_to_search, submit_search, results_table_path, entity_not_available
+from settings.search import go_to_search, submit_search, results_table_path, provincia_path, tipo_ente_1_path, \
+    tipo_ente_2_path, nombre_path, cif_path, buscar_en_historico_nombres
 
 from selenium.common.exceptions import NoSuchElementException
 
@@ -24,7 +25,7 @@ class Searcher:
     # Base url of the web to scrap
     BASE_URL = "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PubInvCCAA/secciones/FrmSelComunidad.aspx"
 
-    def __init__(self, driver, output_folder, version, community):
+    def __init__(self, driver, output_folder, search_parameters):
         """
         Constructor that intializes the search to extract the data
         :param driver: initialized Selenium driver
@@ -32,11 +33,16 @@ class Searcher:
         :param version: desired historical data to extract
         :param community: name of the autonomous community to extract
         """
-        print("Version is {0}\nCommunity is {1}".format(version, community))
+        print(search_parameters)
         self.driver = driver
-        self.version = version
-        self.region = community
         self.search_results = SearchResults(output_folder)
+
+        self.version = search_parameters["version"]
+        self.region = search_parameters["community"]
+        self.province = search_parameters["province"]
+        self.entity_type = search_parameters["entity_type"]
+        self.name = search_parameters["name"]
+        self.cif = search_parameters["cif"]
 
         self.do_search()
 
@@ -104,7 +110,7 @@ class Searcher:
         False otherwise
         """
         # Click the desired region
-        region = self.driver.find_element_by_css_selector(web_map[self.region])
+        region = self.driver.find_element_by_css_selector(web_map[self.region][button_path])
         region.click()
 
         try:
@@ -120,7 +126,19 @@ class Searcher:
         """
         Method that fills the search form with all the paramters from the search
         """
-        # TODO: Include all the available parameters to search
+        if self.province is not None:
+            self.driver.find_element_by_xpath(provincia_path).send_keys(self.province)
+
+        if self.entity_type is not None:
+            self.driver.find_element_by_xpath(tipo_ente_1_path).send_keys(self.entity_type[0])
+            self.driver.find_element_by_xpath(tipo_ente_2_path).send_keys(self.entity_type[1])
+
+        if self.name is not None:
+            self.driver.find_element_by_xpath(nombre_path).send_keys(self.name)
+            self.driver.find_element_by_xpath(buscar_en_historico_nombres).click()
+
+        if self.cif is not None:
+            self.driver.find_element_by_xpath(cif_path).send_keys(self.cif)
 
         # Submit the search
         search_button = self.driver.find_element_by_xpath(submit_search)

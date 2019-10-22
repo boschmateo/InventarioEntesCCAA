@@ -6,19 +6,19 @@ entity_not_available = "//*[@id='lbl_mensaje']"
 
 # Search parameters
 
-provincia = '//*[@id="txtcdprov"]'
+provincia_path = '//*[@id="txtcdprov"]'
 
 ordinal1 = '//*[@id="txtcdcorp"]'
 
-tipo_ente_1 = '//*[@id="txttiporg1"]'
+tipo_ente_1_path = '//*[@id="txttiporg1"]'
 
-tipo_ente_2 = '//*[@id="txttiporg2"]'
+tipo_ente_2_path = '//*[@id="txttiporg2"]'
 
 ordinal_2 = '//*[@id="txttiporg3"]'
 
-nombre = '//*[@id="txtNombre"]'
+nombre_path = '//*[@id="txtNombre"]'
 
-cif = '//*[@id="TxtCIF"]'
+cif_path = '//*[@id="TxtCIF"]'
 
 buscar_en_historico_nombres = '//*[@id="chkHistorico"]'
 
@@ -29,8 +29,8 @@ submit_search = "//*[@id='bt_buscar']"
 # Table with the results
 results_table_path = "//*[@id='TablaResultados']"
 
-idk = {
-    'GOBIERNO CA' : ["BB"],
+entity_types = {
+    'GOBIERNO CA': ["BB"],
     'OA ADMINISTRATIVO': ["BV"],
     'OA COMERCIAL': ["BL"],
     'OA': ["BO"],
