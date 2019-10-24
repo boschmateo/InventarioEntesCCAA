@@ -3,6 +3,7 @@ __author__ = "Roger Bosch Mateo"
 import os
 
 from datetime import datetime
+from random import shuffle
 
 from selenium_wrapper import SeleniumWrapper
 from settings.settings import web_map, province_codes_name
@@ -36,6 +37,10 @@ class InventarioEntesCCAAScrapper:
         for search in self.searches:
             print(str(search) + "\n")
         print("-------------------")
+
+        # Randomize the search so it is different every single time
+        shuffle(self.searches)
+
         for search in self.searches:
             Searcher(self.driver, self.output_folder, search)
     @staticmethod

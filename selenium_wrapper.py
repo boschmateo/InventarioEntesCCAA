@@ -2,6 +2,8 @@ __author__ = "Roger Bosch Mateo"
 
 import os
 import platform
+import time
+from fake_useragent import UserAgent
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -24,6 +26,10 @@ class SeleniumWrapper:
 
         # Start the Chrome driver
         self.driver = webdriver.Chrome(self._get_driver_path(), chrome_options=chrome_options)
+
+        self.latest_response_delay = None
+        self.latest_request_time = None
+        self.ua = UserAgent()
 
     @staticmethod
     def _get_driver_path():
@@ -53,8 +59,21 @@ class SeleniumWrapper:
         of time. Adds user-agent spoofing.
         :param url: url of the desired website to obtain
         """
-        # TODO: Implement here user-agent spoofing and timing restrictions.
+        if self.latest_response_delay is None:
+            self._get(url)
+        else:
+            while time.time() - self.latest_request_time < 10*self.latest_response_delay:
+                time.sleep(0.1)
+            self._get(url)
+
+    def _get(self, url):
+        self.driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": self.ua.random})
+
+        start = time.time()
         self.driver.get(url)
+        self.latest_response_delay = time.time() - start
+        self.latest_request_time = time.time()
+        print(self.driver.execute_script("return navigator.userAgent;"))
 
     def find_element_by_xpath(self, path):
         return self.driver.find_element_by_xpath(path)

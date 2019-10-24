@@ -1,6 +1,7 @@
 __author__ = "Roger Bosch Mateo"
 
 from selenium.webdriver.support.select import Select
+from random import shuffle
 
 from src.entityscrapper import EntityScraper
 from settings.settings import web_map, button_path
@@ -30,12 +31,10 @@ class Searcher:
         Constructor that intializes the search to extract the data
         :param driver: initialized Selenium driver
         :param output_folder: folder where the output .csv files will be dumped
-        :param version: desired historical data to extract
-        :param community: name of the autonomous community to extract
+        :param search_parameters: dictionary with all the parameters for the search
         """
-        print(search_parameters)
         self.driver = driver
-        self.search_results = SearchResults(output_folder)
+        self.search_results = SearchResults(output_folder, search_parameters)
 
         self.version = search_parameters["version"]
         self.region = search_parameters["community"]
@@ -88,6 +87,7 @@ class Searcher:
             if self.version in option.text:
                 select.select_by_value(option.text)
                 self.version = option.text
+                self.search_results.update_search_parameter("version", self.version)
                 found = True
                 break
 
@@ -163,6 +163,9 @@ class Searcher:
                 # Extract the link
                 entity_link = elements[0].find_element_by_xpath(".//a").get_attribute("href")
                 found_links.append(entity_link)
+
+        # Randomize the list of links so each time the order is different.
+        shuffle(found_links)
 
         generic_data_found = []
         activity_data_found = []

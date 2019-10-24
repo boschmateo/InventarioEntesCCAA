@@ -19,6 +19,7 @@ def get_missing_parameters(desired_parameters, available_parameters):
 
     return parameters_not_found
 
+
 description = "#TODO: Add description"
 parser = argparse.ArgumentParser(description=description)
 
