@@ -1,7 +1,0 @@
-Search:
-	- Version: 2019/01 situacion a  01/01/2019
-	- Autonomous community: Región de Murcia
-	- Province: 30
-	- Type: All entities
-	- Name: No specific name
-	- CIF: No specific CIF
