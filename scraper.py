@@ -8,7 +8,7 @@ import argparse
 
 from settings.settings import web_map, province_codes_name
 from settings.search import entity_types
-from src.Inventario_entes_CCAA_scrapper import InventarioEntesCCAAScrapper
+from src.Inventario_entes_CCAA_scrapper import InventarioEntesCCAAScraper
 
 
 def get_missing_parameters(desired_parameters, available_parameters):
@@ -109,7 +109,7 @@ if args.type is not None:
         parser.error("[--type] {0} types that can't be identified: "
                      "{1}.".format(len(types_not_found), ", ".join(types_not_found)))
 
-InventarioEntesCCAAScrapper(version=args.version, communities=args.community, province=args.province,
-                            entity_types=args.type, name=args.name, cif=args.cif, headless=args.headless)
+InventarioEntesCCAAScraper(version=args.version, communities=args.community, province=args.province,
+                           entity_types=args.type, name=args.name, cif=args.cif, headless=args.headless)
 
 

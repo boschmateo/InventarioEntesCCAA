@@ -187,7 +187,8 @@ class Searcher:
 
             # TODO: Remove this
             if count == 15:
-                break
+                #break
+                pass
 
             count += 1
 

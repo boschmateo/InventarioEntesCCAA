@@ -11,7 +11,7 @@ from settings.search import entity_types
 from src.searcher import Searcher
 
 
-class InventarioEntesCCAAScrapper:
+class InventarioEntesCCAAScraper:
     """
     Class that receives the desired search by the user and performs it.
     """
@@ -141,7 +141,7 @@ class InventarioEntesCCAAScrapper:
 
         if provinces is None:
 
-            communities = InventarioEntesCCAAScrapper._get_communities(communities)
+            communities = InventarioEntesCCAAScraper._get_communities(communities)
 
             # Add those communities that are not present with the province data
             for community in communities:

@@ -7,7 +7,6 @@ generic_data_columns = ["version", "comunidad", "codigo_ente", "tipo_ente", "acc
                         "ente_proviene", "direccion", "localidad", "codigo_postal", "provincia",
                         "telefono", "fax", "sitio_web", "email"]
 
-# TODO: Add alternative values
 # Generic data
 codigo_ente = "//*[@id='txtDGCodigoEnte']"
 tipo_ente = "//*[@id='TxtDGTipoEnte']"
@@ -23,6 +22,22 @@ fuente_alta_1 = "//*[@id='TxtDGNomFuente']"
 fuente_alta_2 = "//*[@id='TxtDGInffuentea']"
 alta_desde = "//*[@id='txtDGAltaDesde']"
 ente_proviene = "//*[@id='TxtDGEnteProv']"
+
+# Generic data alternative
+codigo_ente_alt = "//*[@id='txtCodigoEnte']"
+tipo_ente_alt = '//*[@id="TxtTipoEnte"]'
+accionista_mayoritario_alt = None
+nombre_alt = '//*[@id="txtNombre"]'
+cif_alt = '//*[@id="txtCif"]'
+capital_social_alt = '//*[@id="txtCapitalsoc"]'
+finalidad_alt = '//*[@id="TxtFinalidad"]'
+regimen_contable_alt = '//*[@id="TxtRegContable"]'
+regimen_presupuestario_alt = '//*[@id="txtRegPresupuestario"]'
+sector_admin_publica_alt = '//*[@id="txtSecAdmPub"]'
+fuente_alta_1_alt = '//*[@id="TxtNomFuente"]'
+fuente_alta_2_alt = '//*[@id="TxtInffuentea"]'
+alta_desde_alt = '//*[@id="txtAltaDesde"]'
+ente_proviene_alt = '//*[@id="TxtEnteProv"]'
 
 # Postal data (will be included in the same table as generic data)
 direccion = "//*[@id='txtDPDireccion']"

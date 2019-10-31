@@ -62,18 +62,19 @@ class SeleniumWrapper:
         if self.latest_response_delay is None:
             self._get(url)
         else:
-            while time.time() - self.latest_request_time < 10*self.latest_response_delay:
+            # TODO: Change 0 for 10
+            while time.time() - self.latest_request_time < 0*self.latest_response_delay:
                 time.sleep(0.1)
             self._get(url)
 
     def _get(self, url):
+        # Randomize the user-agent header
         self.driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": self.ua.random})
 
         start = time.time()
         self.driver.get(url)
         self.latest_response_delay = time.time() - start
         self.latest_request_time = time.time()
-        print(self.driver.execute_script("return navigator.userAgent;"))
 
     def find_element_by_xpath(self, path):
         return self.driver.find_element_by_xpath(path)
