@@ -72,10 +72,10 @@ python3 scraper.py
 ```
 ### Filtering data
 We desire to obtain:
-    - All those entities that correspond to the type `SOCIEDAD MERCANTIL` and `FUNDACION`,
-    - for the autonomous community of `Cataluña` and `Cantabria`,
-    - for the province of `Huelva`,
-    - during the second half of 2016.
+* All those entities that correspond to the type `SOCIEDAD MERCANTIL` and `FUNDACION`,
+* for the autonomous community of `Cataluña` and `Cantabria`,
+* for the province of `Huelva`,
+* during the second half of 2016.
 
 The script should be called with these arguments:
 
