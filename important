@@ -1,9 +1,2 @@
-- Version 78 for Linux, Mac and Windows is included. If an older or newer version is needed it can be downloaded from https://chromedriver.chromium.org/downloads. + where to put the version
-- In mac os driver proviende de un desarrollador no identificado: ERROR
-- TODO: Handke when a page is inexistent (Pais vasc in some historical data)
+- TODO: Handle when a page is inexistent (Pais vasc in some historical data)
 - TODO: Components que són diferents
-- CHeck ine for province codes: https://www.ine.es/daco/daco42/codmun/cod_provincia.htm
-- To avoid being blocked:
-    - User-Agent Spoofing each request
-    - Exponential elapsed time to avoid breaking the server
-    - Randomize of search queries order and result clicking
