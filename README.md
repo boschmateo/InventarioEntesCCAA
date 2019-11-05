@@ -50,8 +50,7 @@ _Example_: To search in La Rioja and Canarias do `python3 scraper.py --community
     - Melilla: Melilla.
     - Castilla y León: Palencia, Ávila, Burgos, León, Salamanca, Segovia, Soria, Valladolid, Zamora.
 
-    The exact named speficied here must be used in order to map the correct provinces. If a autonomous community and a province from that autonomous community is speficied, the search will be done only to the provinces as this flag is more restrictive. 
-
+    The exact named speficied here must be used in order to map the correct provinces. If a autonomous community and a province from that autonomous community is speficied, the search will be done only to the provinces as this flag is more restrictive.
     _Example_: To search the province of Tarragona Madrid and Gerona do: `python3 scraper.py --province`
 
 * __--type__: Obtain only data from entities that belong to a specific type of entity. The possible values are: GOBIERNO CA, OA ADMINISTRATIVO, OA COMERCIAL, OA, ENTIDAD PUBLICA EMPRESARIAL, ENTE PUBLICO, AGENCIA, CONSORCIO, FUNDACION, INSTITUCION SIN AL, SOCIEDAD MERCANTIL, UNIVERSIDAD, CIUDAD AUTONOMA. If this flag is not specified all types of entities will be searched.
@@ -73,10 +72,10 @@ python3 scraper.py
 ```
 ### Filtering data
 We desire to obtain:
-    - All those entities that correspond to the type `SOCIEDAD MERCANTIL` and `FUNDACION`,
-    - for the autonomous community of `Cataluña` and `Cantabria`,
-    - for the province of `Huelva`,
-    - during the second half of 2016.
+* All those entities that correspond to the type `SOCIEDAD MERCANTIL` and `FUNDACION`,
+* for the autonomous community of `Cataluña` and `Cantabria`,
+* for the province of `Huelva`,
+* during the second half of 2016.
 
 The script should be called with these arguments:
 
