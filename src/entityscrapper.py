@@ -124,6 +124,19 @@ class EntityScraper:
         try:
             return self.generic_table_extractor(se.components_table, se.components_columns)
         except NoSuchElementException:
+            return self.extract_alt_components()
+
+    def extract_alt_components(self):
+        try:
+            return {
+                "version": self.version,
+                "codigo_ente": self.generic_data["codigo_ente"],
+                "total_miembros_patronado": self._get_value_from_xpath(se.components_total),
+                "n_patronos_designados_cccaa_o_unidades_dependientes": self._get_value_from_xpath(se.components_por_ccaa),
+                "n_patronos_designados_adinistraciones_pub": self._get_value_from_xpath(se.components_adm_publicas),
+                "n_patronos_sector_privado": self._get_value_from_xpath(se.components_sector_privado)
+            }
+        except NoSuchElementException:
             return []
 
     def extract_historical_name_data(self):

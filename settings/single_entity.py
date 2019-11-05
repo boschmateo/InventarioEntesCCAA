@@ -53,11 +53,19 @@ email = "//*[@id='TxtDPemail']"
 activity_table = "//*[@id='TablaDetalle']"
 activity_columns = ["codigo", "actividad", "fuente_alta", "inf_fuente_alta", "alta_desde"]
 
-# TODO: Add alternative table
 # Components data
 components_table = "//*[@id='TABLE1']"
 components_columns = ["codigo", "componente", "porcentaje_participacion", "porcentaje_voto",
                      "fuente_alta", "inf_fuente_alta", "alta_desde"]
+
+components_alt_columns = ["total_miembros_patronado", "n_patronos_designados_cccaa_o_unidades_dependientes",
+                          "n_patronos_designados_adinistraciones_pub", "n_patronos_sector_privado"]
+
+# Components data alt
+components_total = '//*[@id="TxtMiembroGobierno"]'
+components_por_ccaa = '//*[@id="TxtMiembroCCAA"]'
+components_adm_publicas = '//*[@id="TxtMiembroAdmPub"]'
+components_sector_privado = '//*[@id="TxtMiembroPrivado"]'
 
 # Historical name data
 historical_name_table = "//*[@id='TABLE2']"

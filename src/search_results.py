@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 from settings.single_entity import activity_columns, components_columns, historical_name_columns, \
-    historical_social_capital_columns, generic_data_columns
+    historical_social_capital_columns, generic_data_columns, components_alt_columns
 
 
 class SearchResults:
@@ -15,6 +15,7 @@ class SearchResults:
         self.generic_data = None
         self.activity_data = None
         self.components_data = None
+        self.components_alt_data = None
         self.historical_names_data = None
         self.historical_social_capital_data = None
 
@@ -32,6 +33,12 @@ class SearchResults:
         # entity and the current version
         columns = ["version", "codigo_ente"] + components_columns
         self.components_data = pd.DataFrame(values, columns=columns)
+
+    def add_components_alt_data(self, values):
+        # Add two necessary columns to the data t be able to identify the source
+        # entity and the current version
+        columns = ["version", "codigo_ente"] + components_alt_columns
+        self.components_alt_data = pd.DataFrame(values, columns=columns)
 
     def add_historical_names_data(self, values):
         # Add two necessary columns to the data t be able to identify the source
@@ -56,6 +63,9 @@ class SearchResults:
 
         components_path = self.output_folder + "/components_data.csv"
         self._single_export(components_path, self.components_data)
+
+        components_alt_path = self.output_folder + "/components_alt_data.csv"
+        self._single_export(components_alt_path, self.components_alt_data)
 
         historical_name_path = self.output_folder + "/historical_name_data.csv"
         self._single_export(historical_name_path, self.historical_names_data)

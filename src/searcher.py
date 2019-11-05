@@ -141,6 +141,7 @@ class Searcher:
         """
         Method that fills the search form with all the paramters from the search
         """
+        time.sleep(1)
         if self.province is not None:
             self.driver.find_element_by_xpath(provincia_path).send_keys(self.province)
 
@@ -185,6 +186,7 @@ class Searcher:
         generic_data_found = []
         activity_data_found = []
         components_data_found = []
+        components_alt_data_found = []
         historical_name_data_found = []
         historical_social_capital_data_found = []
         count = 0
@@ -196,7 +198,10 @@ class Searcher:
             # Update the found data variables with the new data
             generic_data_found.append(gd)
             activity_data_found += act
-            components_data_found += comp
+            if "total_miembros_patronado" in comp:
+                components_alt_data_found += comp
+            else:
+                components_data_found += comp
             historical_name_data_found += hist_name
             historical_social_capital_data_found += hist_c_s
 
@@ -211,6 +216,7 @@ class Searcher:
         self.search_results.add_generic_data(generic_data_found)
         self.search_results.add_activity_data(activity_data_found)
         self.search_results.add_components_data(components_data_found)
+        self.search_results.add_components_alt_data(components_alt_data_found)
         self.search_results.add_historical_names_data(historical_name_data_found)
         self.search_results.add_historical_social_capital_data(historical_social_capital_data_found)
 
