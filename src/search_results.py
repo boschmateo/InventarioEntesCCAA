@@ -99,3 +99,9 @@ class SearchResults:
 
     def update_search_parameter(self, key, value):
         self.search_parameters[key] = value
+
+    def export_image(self, community, img_response):
+        file_path = self.output_folder + "/img/{community}.png".format(community=community)
+        with open(file_path, "wb") as f:
+            for chunk in img_response:
+                f.write(chunk)

@@ -67,6 +67,8 @@ class InventarioEntesCCAAScraper:
         output_folder = output_directory + folder_name
 
         os.mkdir(output_folder)
+        os.mkdir(output_folder + "/img")
+
 
         return output_folder
 

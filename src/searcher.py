@@ -1,10 +1,14 @@
+import time
+
+import requests
+
 __author__ = "Roger Bosch Mateo"
 
 from selenium.webdriver.support.select import Select
 from random import shuffle
 
 from src.entityscrapper import EntityScraper
-from settings.settings import web_map, button_path
+from settings.settings import web_map, button_path, img_path
 from settings.versions import show_versions, options_versions, submit_versions
 from settings.single_entity import show_all_data
 from settings.search import go_to_search, submit_search, results_table_path, provincia_path, tipo_ente_1_path, \
@@ -55,6 +59,7 @@ class Searcher:
 
         # Request the proper historical data
         self.select_proper_version()
+        self.save_image()
 
         # If the entity exists in this historical version, extract the data
         if self.select_proper_region() is True:
@@ -102,6 +107,14 @@ class Searcher:
         # Send the form
         submit_button.submit()
 
+    def save_image(self):
+        """
+        Method that saves the image of the desired autonomous community.
+        """
+        img = self.driver.find_element_by_xpath(web_map[self.region][img_path]).get_attribute("src")
+        img = requests.get(img, stream=True)
+        self.search_results.export_image(self.region, img)
+
     def select_proper_region(self):
         """
         Method that selects the desired region for this search from the
@@ -112,10 +125,12 @@ class Searcher:
         # Click the desired region
         region = self.driver.find_element_by_css_selector(web_map[self.region][button_path])
         region.click()
+        time.sleep(1)
 
         try:
             search = self.driver.find_element_by_css_selector(go_to_search)
             search.click()
+            time.sleep(1)
             return True
         except NoSuchElementException:
             # This means that the information of this autonomous community is not available
@@ -186,9 +201,9 @@ class Searcher:
             historical_social_capital_data_found += hist_c_s
 
             # TODO: Remove this
-            if count == 15:
-                #break
-                pass
+            if count == 2:
+                break
+
 
             count += 1
 
