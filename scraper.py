@@ -51,31 +51,43 @@ parser.add_argument("--community",
 parser.add_argument("--province",
                     type=str,
                     nargs="+",
-                    help="TODO"
+                    help="Obtain only data from a specific province of an autonomous community. "
+                         "Any number of provinces can be speficied. The names of the provinces "
+                         "can be found in the readme (https://github.com/boschmateo/InventarioEntesCCAA). "
+                         "The exact named speficied here must be used in order to map the correct provinces. "
+                         "If a autonomous community and a province from that autonomous community is speficied, "
+                         "the search will be done only to the provinces as this flag is more restrictive. "
+                         "Example: To search the province of Tarragona, Madrid and Gerona do: "
+                         "python3 scraper.py --province Tarragona Madrid Gerona"
                     )
 
 parser.add_argument("--type",
                     type=str,
                     nargs="+",
-                    help="TODO"
+                    help="Obtain only data from entities that belong to a specific type of entity. "
+                         "The possible values are: GOBIERNO CA, OA ADMINISTRATIVO, OA COMERCIAL, OA, "
+                         "ENTIDAD PUBLICA EMPRESARIAL, ENTE PUBLICO, AGENCIA, CONSORCIO, FUNDACION, "
+                         "INSTITUCION SIN AL, SOCIEDAD MERCANTIL, UNIVERSIDAD, CIUDAD AUTONOMA. "
+                         "If this flag is not specified all types of entities will be searched. "
+                         "Example: To search for entities that correspond to the type SOCIEDAD MERCANTIL "
+                         "and FUNDACION do: python3 scraper.py --type \"SOCIEDAD MERCANTIL\" FUNDACION"
                     )
 
 parser.add_argument("--name",
                     type=str,
                     nargs="?",
-                    help="TODO"
+                    help="Obtain only data from entities that match the specified name."
                     )
 
 parser.add_argument("--cif",
                     type=str,
                     nargs="?",
-                    help="TODO"
+                    help="Obtain only data from entities that match the speficied cif."
                     )
 
 parser.add_argument("--headless",
                     action="store_true",
-                    help="Start the web browser as headless. This means that no graphical interface "
-                         "will be shown during scraping"
+                    help="If this flag is set the scraping will begin in headless mode (no GUI will be shown)."
                     )
 
 args = parser.parse_args()

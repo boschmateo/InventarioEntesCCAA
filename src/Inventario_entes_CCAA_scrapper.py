@@ -43,6 +43,7 @@ class InventarioEntesCCAAScraper:
 
         for search in self.searches:
             Searcher(self.driver, self.output_folder, search)
+
     @staticmethod
     def _start_chrome_driver(headless=True):
         """
@@ -75,7 +76,6 @@ class InventarioEntesCCAAScraper:
     def find_all_necessary_searches(self, version, communities, province, entity_types, name, cif):
         version = self._version_search(version)
         communities = self._communities_search(communities, province)
-        #provinces = self._province_search(province)
         entity_types = self._entity_types_search(entity_types)
 
         searches_to_do = []
