@@ -70,6 +70,8 @@ To scrap all the data from the website just run:
 ```
 python3 scraper.py
 ```
+
+The output of this file is available at `./output/output_11-07-2019_11-38-17/`.
 ### Filtering data
 We desire to obtain:
 * All those entities that correspond to the type `SOCIEDAD MERCANTIL` and `FUNDACION`,
@@ -88,3 +90,5 @@ See that for searching the province of `Huelva` it is not necessary to specifiy 
 ```
 python3 scraper.py --version 2016/02 --community Cataluña Cantabria Andalucía --province Huelva --type \"SOCIEDAD MERCANTIL\" FUNDACION
 ```
+
+The output of this file is available at `./output/output_11-07-2019_12-47-50/`.

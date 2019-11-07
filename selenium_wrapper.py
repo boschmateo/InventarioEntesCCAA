@@ -59,18 +59,22 @@ class SeleniumWrapper:
         of time. Adds user-agent spoofing.
         :param url: url of the desired website to obtain
         """
+        # If it's the first request no restrictions are set
         if self.latest_response_delay is None:
             self._get(url)
+        # Otherwise
         else:
-            # TODO: Change 0 for 10
-            while time.time() - self.latest_request_time < 0*self.latest_response_delay:
+            # Wait 10 times the time it took to do the latest request
+            while time.time() - self.latest_request_time < 10*self.latest_response_delay:
                 time.sleep(0.1)
+            # Call function to do the request
             self._get(url)
 
     def _get(self, url):
         # Randomize the user-agent header
         self.driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": self.ua.random})
 
+        # Calculate the time it elapses between the start of the request and the end
         start = time.time()
         self.driver.get(url)
         self.latest_response_delay = time.time() - start

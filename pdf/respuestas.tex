@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{listings}
 
 \setlength {\marginparwidth }{2cm}
 \usepackage[colorinlistoftodos]{todonotes}
@@ -19,6 +20,13 @@ Pràctica 1: Inventari d'ens dependents de les Comunitats Autònomes d'Espanya (
 
 \maketitle
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{img/mapa.pdf}
+    \caption{Comunitats autònomes i províncies d'Espanya} 
+    \label{flowchart}
+\end{figure}
+
 \section*{Context}
 Qualsevol ciutadà té dret a accedir a la informació sobre les diverses activitats públiques del país. La llei 19/2013 de transparència va aconseguir donar un gran pas cap a aquesta fita obligant a les administracions públiques a concedir aquesta informació de manera periòdica, gratuïta, estructurada i reutilitzable entre d'altres. A partir d'aquesta llei són molts els portals oferts per les entitats públiques que faciliten l'accés a tal informació: el portal del Gobern d'Espanya, de Catalunya o de la diputació de Barcelona per posar uns quants exemples.\par
 Són tantes les fonts de dades que no totes estan sempre accessibles de la millor manera per l'usuari. 
@@ -29,7 +37,7 @@ Aquest \textit{dataset} preten posar un petit gra de sorra per facilitar al ciut
 El portal d'\href{https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PubInvCCAA/secciones/FrmSelComunidad.aspx}{inventaris d'ens dependents de les comunitats autònomes} mostra informació de les 16 comunitats autònomes (Andalusia, Aragó, Principat d'Astúries, Illes Balears, País Basc, Canàries, Cantabria, Castella la Manxa, Castella i Lleó, Catalunya, Extremadura, Galícia, Comunitat de Madrid, Regió de Múrcia, Navarra, La Rioja i País Valencià) i les dues ciutats autònomes (Ceuta i Melilla) d'Espanya. Per a cada comunitat autònoma, es mostren totes aquelles entitats que es consideren integrants de l'inventari d'ens de cada comunitat autònoma (Autogobern de la comunitat autònoma, organismes autònoms administratius, organismes autònoms comercials, organismes autònoms, entitats públiques empresarials, ens públics, consorcis, fundacions, altres institucions sense ànim de lucre, societats mercantils i universitats). Per a cada entitat es mostra informació, si existeix: de caràcter general, de les activitats que realitza, dels components que la formen, l'històric de noms oficials i de capital social.\par
 
 \section*{Contingut}
-\todo{Per cada taula descriure atribut}
+
 El dataset inclou cinc taules diferents: dades generals, activitats, components (i components alternatiu), històric de noms i històric de capital social. És a dir, no estem parlant d'un dataset amb un únic fitxer CSV que el pot representar ja que hi ha diverses relacions entre aquestes taules. En la Figura \ref{UML} es poden veure les associacions entre cadascuna d'aquestes taules.
 
 
@@ -72,56 +80,61 @@ Seguidament per a cadascuna de les taules es descriuen els seus atributs:
 
 \paragraph{Actividades\\}
 \begin{itemize}
-    \item \textbf{version}:
-    \item \textbf{codigo\_ente}:
-    \item \textbf{codigo}:
-    \item \textbf{actividad}:
-    \item \textbf{fuente\_alta}:
-    \item \textbf{inf\_fuente\_alta}:
-    \item \textbf{alta\_desde}: Date
+    \item \textbf{version}: Indica la versió que representa la informació. Usualment cada any presenta dues versions diferents la 01 i la 02. És per aixó que sol tenir els valors 200XX/0X.
+    \item \textbf{codigo\_ente}: Codi identificador de l'entitat.
+    \item \textbf{codigo}: Codi CNAE corresponent a l'activitat.
+    \item \textbf{actividad}: Nom de l'activitat.
+    \item \textbf{fuente\_alta}: Data d'alta d'aquesta activitat de l'entitat a l'inventari.
+    \item \textbf{inf\_fuente\_alta}: Informació sobre l'alta de l'activitat.
+    \item \textbf{alta\_desde}: Data d'alta oficial d'aquesta activitat a l'entitat.
 \end{itemize}
 
 \paragraph{Componentes\\}
 \begin{itemize}
-    \item \textbf{version}:
-    \item \textbf{codigo\_ente}:
-    \item \textbf{codigo}:
-    \item \textbf{componente}:
-    \item \textbf{porcentaje\_participacion}:
-    \item \textbf{porcentaje\_voto}:
-    \item \textbf{fuente\_alta}:
-    \item \textbf{inf\_fuente\_alta}:
-    \item \textbf{alta\_desde}:
+    \item \textbf{version}: Indica la versió que representa la informació. Usualment cada any presenta dues versions diferents la 01 i la 02. És per aixó que sol tenir els valors 200XX/0X.
+    \item \textbf{codigo\_ente}: Codi identificador de l'entitat.
+    \item \textbf{codigo}: Codi del component (entitat) que forma part d'aquesta entitat.
+    \item \textbf{componente}: Nom del component.
+    \item \textbf{porcentaje\_participacion}: Percentatge de participació que ostenta cada component sobre aquesta entitat.
+    \item \textbf{porcentaje\_voto}: Percentatge de vot directe que ostenta cada component sobre aquesta entitat.
+    \item \textbf{fuente\_alta}: Data d'alta d'aquest component de l'entitat a l'inventari.
+    \item \textbf{inf\_fuente\_alta}: Informació sobre l'alta del component.
+    \item \textbf{alta\_desde}: Data d'alta oficial d'aquest component a l'entitat.
 \end{itemize}
 
 \paragraph{Componentes alternativo\\}
 \begin{itemize}
-    \item Falta veure
+    \item \textbf{version}: Indica la versió que representa la informació. Usualment cada any presenta dues versions diferents la 01 i la 02. És per aixó que sol tenir els valors 200XX/0X.
+    \item \textbf{codigo\_ente}: Codi identificador de l'entitat.
+    \item \textbf{total\_miembros\_patronado}: Nombre total de membres del patronat.
+    \item \textbf{n\_patronos\_designados\_cccaa\_o\_unidades\_dependientes}: Nombre de membres del patronat designats per la comunitat autònoma o per alguna de les seves unitats dependents.
+    \item \textbf{n\_patronos\_designados\_adinistraciones\_pub}: Nombre de membres del patronat designats per altres administracions públiques.
+    \item \textbf{n\_patronos\_sector\_privado}: Número de patrons designats pel sector privat.
 \end{itemize}
 
 \paragraph{Histórico de nombres\\}
 \begin{itemize}
-    \item \textbf{version}:
-    \item \textbf{codigo\_ente}:
-    \item \textbf{nombre}:
-    \item \textbf{fuente\_alta}:
-    \item \textbf{inf\_fuente\_alta}:
-    \item \textbf{fuente\_baja}:
-    \item \textbf{inf\_fuente\_baja}:
-    \item \textbf{alta\_desde}:
-    \item \textbf{baja\_desde}:
+    \item \textbf{version}: Indica la versió que representa la informació. Usualment cada any presenta dues versions diferents la 01 i la 02. És per aixó que sol tenir els valors 200XX/0X.
+    \item \textbf{codigo\_ente}: Codi identificador de l'entitat.
+    \item \textbf{nombre}: Nom assignat.
+    \item \textbf{fuente\_alta}: Data d'alta d'aquest nom de l'entitat a l'inventari.
+    \item \textbf{inf\_fuente\_alta}: Informació sobre l'alta del nom.
+    \item \textbf{fuente\_baja}: Data de baixa d'aquest nom de l'entitat a l'inventari.
+    \item \textbf{inf\_fuente\_baja}: Informació sobre la baixa del nom.
+    \item \textbf{alta\_desde}: Data d'alta oficial d'aquest nom a l'entitat.
+    \item \textbf{baja\_desde}: Data de baixa oficial d'aquest nom a l'entitat.
 \end{itemize}
 \paragraph{Histórico capital social\\}
 \begin{itemize}
-    \item \textbf{version}:
-    \item \textbf{codigo\_ente}:
-    \item \textbf{nombre}:
-    \item \textbf{fuente\_alta}:
-    \item \textbf{inf\_fuente\_alta}:
-    \item \textbf{fuente\_baja}:
-    \item \textbf{inf\_fuente\_baja}:
-    \item \textbf{alta\_desde}:
-    \item \textbf{baja\_desde}:
+    \item \textbf{version}: Indica la versió que representa la informació. Usualment cada any presenta dues versions diferents la 01 i la 02. És per aixó que sol tenir els valors 200XX/0X.
+    \item \textbf{codigo\_ente}: Codi identificador de l'entitat.
+    \item \textbf{capital\_social}: Valor del capital social de l'entitat.
+    \item \textbf{fuente\_alta}: Data d'alta d'aquest capital social de l'entitat a l'inventari.
+    \item \textbf{inf\_fuente\_alta}: Informació sobre l'alta del capital social.
+    \item \textbf{fuente\_baja}: Data de baixa d'aquest capital social de l'entitat a l'inventari.
+    \item \textbf{inf\_fuente\_baja}: Informació sobre la baixa del nom.
+    \item \textbf{alta\_desde}: Data d'alta oficial d'aquest capital social a l'entitat.
+    \item \textbf{baja\_desde}: Data de baixa oficial d'aquest capital social a l'entitat.
 \end{itemize}
 
 \begin{figure}[H]
@@ -157,7 +170,8 @@ Aquest \textit{web scraper} creat facilita l'extracció de tota l'informació de
 \end{itemize}
 
 
-Addicionalment el programa aplica algunes tècniques per evitar ser bloquejats durant la seva utilització:
+\section*{Tècniques per evitar el bloqueig}
+Tot i que no es va trobar cap problema de bloqueig durant el web scraping inicial, s'han decidit aplicar algunes tècniques per evitar ser bloquejats durant l'utilització del scraper.
 \begin{itemize}
     \item Amb l'ús de \textit{User-Agent Spoofing} cada vegada que es realitza un \textit{request} el \textit{header} és cambiat per un altre totalment diferent, gràcies a la llibreria de Python \texttt{fake-useragent}\footnote{\url{https://pypi.org/project/fake-useragent/}} que proporciona una base de dades amb dades reals. 
     \item Per evitar saturar el servidor es calcula el temps que s'ha tardat en rebre l'últim \textit{request} realitzat i no es realitza el següent fins que hagin passat deu vegades aquest temps.
@@ -167,6 +181,43 @@ Addicionalment el programa aplica algunes tècniques per evitar ser bloquejats d
         \item La mateixa acció realitza la clase \textit{Searcher} al cridar \textit{EntityScraper}. Els links no es seguixen seqüencialment.
     \end{itemize}
 \end{itemize}
+
+Per a fer-ho possible s'ha creat un \textit{wrapper} cada vegada que es fa una crida al driver de selenium que obliga a realitzar l'espera tal i com es mostra en el següent codi. L'únic que s'ha de fer des de l'scraper és cridar al mètode \texttt{get()} amb la \texttt{url} desitjada.
+
+
+
+
+\noindent\begin{lstlisting}[language=Python]
+    def get(self, url):
+      # If it's the first request no restrictions 
+      # are set
+      if self.latest_response_delay is None:
+        self._get(url)
+      # Otherwise
+      else:
+        # Wait 10 times the time it took to do 
+        # the latest request
+        while time.time() - self.latest_request_time
+        < 10*self.latest_response_delay:
+          time.sleep(0.1)
+        # Call function to do the request
+        self._get(url)
+
+    def _get(self, url):
+      # Randomize the user-agent header
+      self.driver.execute_cdp_cmd(
+        'Network.setUserAgentOverride', 
+        {"userAgent": self.ua.random}
+        )
+
+      # Calculate the time it elapses between the 
+      # start of the request and the end
+      start = time.time()
+      self.driver.get(url)
+      self.latest_response_delay = time.time() - start
+      self.latest_request_time = time.time()
+\end{lstlisting}
+
 
 
 
