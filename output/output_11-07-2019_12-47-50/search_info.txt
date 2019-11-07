@@ -1,0 +1,63 @@
+Search:
+	- Version: 2016/02 situacion a 01/07/2016
+	- Autonomous community: Cataluña
+	- Province: All provinces
+	- Type: FP
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Cataluña
+	- Province: All provinces
+	- Type: HH
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Andalucía
+	- Province: 21
+	- Type: ZP
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Cataluña
+	- Province: All provinces
+	- Type: ZP
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Cataluña
+	- Province: All provinces
+	- Type: XP
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Cantabria
+	- Province: All provinces
+	- Type: XP
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Cantabria
+	- Province: All provinces
+	- Type: BP
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Andalucía
+	- Province: 21
+	- Type: BP
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2016/02 situacion a  01/07/2016
+	- Autonomous community: Andalucía
+	- Province: 21
+	- Type: XP
+	- Name: No specific name
+	- CIF: No specific CIF
