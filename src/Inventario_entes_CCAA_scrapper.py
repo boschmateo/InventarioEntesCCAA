@@ -1,3 +1,5 @@
+from selenium.common.exceptions import NoSuchElementException
+
 __author__ = "Roger Bosch Mateo"
 
 import os
@@ -42,7 +44,13 @@ class InventarioEntesCCAAScraper:
         shuffle(self.searches)
 
         for search in self.searches:
-            Searcher(self.driver, self.output_folder, search)
+            while True:
+                try:
+                    Searcher(self.driver, self.output_folder, search)
+                    break
+                except NoSuchElementException:
+                    print("HEY I BROKE DOWN")
+
 
     @staticmethod
     def _start_chrome_driver(headless=True):

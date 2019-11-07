@@ -1,0 +1,63 @@
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Canarias
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Castilla y León
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: País Vasco
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Melilla
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Región de Murcia
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Comunitat Valenciana
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Cataluña
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Principado de Asturias
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF
+Search:
+	- Version: 2019/01 situacion a  01/01/2019
+	- Autonomous community: Ceuta
+	- Province: All provinces
+	- Type: All entities
+	- Name: No specific name
+	- CIF: No specific CIF

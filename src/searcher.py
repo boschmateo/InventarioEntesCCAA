@@ -198,7 +198,7 @@ class Searcher:
             # Update the found data variables with the new data
             generic_data_found.append(gd)
             activity_data_found += act
-            if "total_miembros_patronado" in comp:
+            if len(comp) > 0 and "total_miembros_patronado" in comp[0]:
                 components_alt_data_found += comp
             else:
                 components_data_found += comp
@@ -207,7 +207,7 @@ class Searcher:
 
             # TODO: Remove this
             if count == 2:
-                break
+                pass
 
 
             count += 1
